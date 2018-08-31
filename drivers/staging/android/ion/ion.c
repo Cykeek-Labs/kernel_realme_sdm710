@@ -401,7 +401,8 @@ struct ion_handle *ion_handle_get_by_id(struct ion_client *client,
 	return handle;
 }
 
-bool ion_handle_validate(struct ion_client *client, struct ion_handle *handle)
+static bool ion_handle_validate(struct ion_client *client,
+				struct ion_handle *handle)
 {
 	WARN_ON(!mutex_is_locked(&client->lock));
 	return idr_find(&client->idr, handle->id) == handle;
@@ -1347,7 +1348,7 @@ int ion_share_dma_buf_fd_nolock(struct ion_client *client,
 	return __ion_share_dma_buf_fd(client, handle, false);
 }
 
-static struct ion_handle *__ion_import_dma_buf(struct ion_client *client,
+struct ion_handle *__ion_import_dma_buf(struct ion_client *client,
 				      struct dma_buf *dmabuf, bool lock_client)
 {
 	struct ion_buffer *buffer;
