@@ -30,6 +30,10 @@ CFLAGS_vgettimeofday.o = -O2
 CFLAGS_vgettimeofday.o += -mcmodel=tiny
 endif
 
+ifeq ($(cc-name),clang)
+ccflags-y += -Wno-unused-command-line-argument
+endif
+
 # Disable gcov profiling for VDSO code
 GCOV_PROFILE := n
 KASAN_SANITIZE := n
