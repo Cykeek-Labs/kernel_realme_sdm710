@@ -1363,9 +1363,6 @@ static int dwc3_probe(struct platform_device *pdev)
 		goto err_core_init;
 	}
 
-err5:
-	dwc3_event_buffers_cleanup(dwc);
-
 	usb_phy_shutdown(dwc->usb2_phy);
 	usb_phy_shutdown(dwc->usb3_phy);
 	phy_exit(dwc->usb2_generic_phy);
