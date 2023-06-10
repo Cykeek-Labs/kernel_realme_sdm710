@@ -343,12 +343,6 @@ static int ion_do_cache_op(struct ion_client *client, struct ion_handle *handle,
 	struct page *page;
 	struct ion_buffer *buffer;
 
-	if (!ion_handle_validate(client, handle)) {
-		pr_err("%s: invalid handle passed to %s.\n",
-		       __func__, __func__);
-		return -EINVAL;
-	}
-
 	buffer = get_buffer(handle);
 	mutex_lock(&buffer->lock);
 	flags = buffer->flags;
