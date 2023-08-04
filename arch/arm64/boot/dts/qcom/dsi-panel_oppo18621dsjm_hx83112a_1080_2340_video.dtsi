@@ -45,6 +45,7 @@
 		qcom,mdss-dsi-bl-min-level = <1>;
 		qcom,mdss-brightness-max-level = <4095>;
 		qcom,mdss-dsi-bl-max-level = <4095>;
+		qcom,bl-update-flag = "delay_until_first_frame";
 		qcom,mdss-dsi-reset-sequence = <1 5>, <0 5>, <1 60>;
 		qcom,mdss-dsi-post-init-delay = <1>;
 		//qcom,mdss-dsi-pan-enable-dynamic-fps;
@@ -124,7 +125,7 @@
 					05 01 00 00 78 00 02 10 00];
 					qcom,mdss-dsi-on-command-state = "dsi_lp_mode";
 					qcom,mdss-dsi-off-command-state = "dsi_lp_mode";
-							qcom,mdss-dsi-cabc-off-command = [
+			qcom,mdss-dsi-cabc-off-command = [
 					15 01 00 00 00 00 02 53 2C
 					15 01 00 00 00 00 02 55 00
 					05 01 00 00 10 00 02 29 00];

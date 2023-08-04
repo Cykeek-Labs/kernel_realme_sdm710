@@ -23,7 +23,6 @@
 	compatible = "qcom,ufs-phy-qmp-v3";
 
 	vdda-phy-supply = <&pm660l_l1>; /* 0.88v */
-	vdda-phy-always-on;
 	vdda-pll-supply = <&pm660_l1>; /* 1.2v */
 	vdda-phy-max-microamp = <62900>;
 	vdda-pll-max-microamp = <18300>;
@@ -63,47 +62,45 @@
 &qupv3_se8_spi {
 	status = "disabled";
 };
+
 &qupv3_se0_spi {
-	/*YunRui.Chen@BSP.TP.Function, 2018/11/19, add for himax noflash*/
 	/* Novatek device tree node */
-    status = "ok";
-    #address-cells = <1>;
-    #size-cells = <0>;
-    touchscreen@0 {
-        status = "okay";
-        compatible = "oppo,tp_noflash";
-        reg = <0>;
-        chip-name = "OPPO_TP_NOFLASH";
-
-        spi-max-frequency = <9600000>;	//4800000,9600000,15000000,19200000
-        reset-gpio = <&tlmm 99 0x00>;
-        interrupt-parent = <&tlmm>;
-        interrupts = <125 0x01>;
-        irq-gpio = <&tlmm 125 0x2001>;
-        lcd-reset-gpio = <&tlmm 26 0x00>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&ts_int_active &ts_reset_active>;
-        
-		touchpanel,max-num-support = <10>;
-        touchpanel,tx-rx-num = <16 36>;
-        touchpanel,panel-coords = <1080 2340>;
-        touchpanel,display-coords = <1080 2340>;
-
-        incell_screen;
-        fw_edge_limit_support;
-        black_gesture_support;
-        charger_pump_support;
-		headset_pump_support;
-        //spurious_fingerprint_support;
-        //lcd_trigger_fp_check;
-		esd_handle_support;
-        black_gesture_test_support;
-        game_switch_support;
-        noflash_support;
-        lcd_trigger_load_tp_fw_support;
-        smart_gesture_support;
-		pressure_report_support;
-        fw_update_app_support;
+     status = "ok";
+     #address-cells = <1>;
+     #size-cells = <0>;
+     touchscreen@0 {
+         status = "okay";
+         compatible = "oppo,tp_noflash";
+         reg = <0>;
+         chip-name = "OPPO_TP_NOFLASH";
+         spi-max-frequency = <9600000>;	//4800000,9600000,15000000,19200000
+         reset-gpio = <&tlmm 99 0x00>;
+         interrupt-parent = <&tlmm>;
+         interrupts = <125 0x01>;
+         irq-gpio = <&tlmm 125 0x2001>;
+         lcd-reset-gpio = <&tlmm 26 0x00>;
+         pinctrl-names = "default";
+         pinctrl-0 = <&ts_int_active &ts_reset_active>;
+         touchpanel,max-num-support = <10>;
+         touchpanel,tx-rx-num = <16 36>;
+         touchpanel,panel-coords = <1080 2340>;
+         touchpanel,display-coords = <1080 2340>;
+         incell_screen;
+         irq_need_dev_resume_ok;
+         fw_edge_limit_support;
+         black_gesture_support;
+         charger_pump_support;
+         headset_pump_support;
+         //spurious_fingerprint_support;
+         //lcd_trigger_fp_check;
+         esd_handle_support;
+         black_gesture_test_support;
+         game_switch_support;
+         noflash_support;
+         lcd_trigger_load_tp_fw_support;
+         smart_gesture_support;
+         pressure_report_support;
+         fw_update_app_support;
 
         /*
         *Virtual Key Config:
@@ -122,33 +119,9 @@
         touchpanel,button-type = <4>;
     };
 };
-//else if
-/*
-&qupv3_se3_i2c {
-	status = "ok";
-	nq@28 {
-		compatible = "qcom,nq-nci";
-		reg = <0x28>;
-		qcom,nq-irq = <&tlmm 44 0x00>;
-		qcom,nq-ven = <&tlmm 12 0x00>;
-		qcom,nq-firm = <&tlmm 43 0x00>;
-		qcom,nq-clkreq = <&pm660_gpios 4 0x00>;
-		qcom,nq-esepwr = <&tlmm 116 0x00>;
-		interrupt-parent = <&tlmm>;
-		qcom,clk-src = "BBCLK3";
-		interrupts = <44 0>;
-		interrupt-names = "nfc_irq";
-		pinctrl-names = "nfc_active", "nfc_suspend";
-		pinctrl-0 = <&nfc_int_active
-			     &nfc_enable_active
-			     &nfc_clk_default>;
-		pinctrl-1 = <&nfc_int_suspend &nfc_enable_suspend>;
-		clocks = <&clock_rpmh RPMH_LN_BB_CLK3>;
-		clock-names = "ref_clk";
-	};
-};
-*/
-//#endif /* VENDOR_EDIT */
+
+//#ifndef OPLUS_FEATURE_CHG_BASIC
+//#endif /* OPLUS_FEATURE_CHG_BASIC */
 &qupv3_se10_i2c {
 	status = "ok";
 };
@@ -189,12 +162,8 @@
 	pinctrl-1 = <&sdc2_clk_off &sdc2_cmd_off &sdc2_data_off &sdc2_cd_off>;
 
 	cd-gpios = <&tlmm 96 0x0>;
-	/* #ifndef VENDOR_EDIT */
-	/* Nan.Zhong@PSW.MM.AudioDriver.Machine, 2019/08/14, Modify for dbmdx */
+
 	status = "ok";
-	/* #else  VENDOR_EDIT */
-	//status = "disable";
-	/* #endif VENDOR_EDIT */
 };
 
 &vendor {
@@ -210,76 +179,11 @@
 	qcom,battery-data = <&mtp_batterydata>;
 };
 
-//#ifdef VENDOR_EDIT
-&qupv3_se9_i2c  {
-	//Wanghao@BSP.group 2018-04-15 add for enable i2c_9
-	status = "okay";
-	synaptics17081@20 {
-		compatible = "synaptics-s3706";
-		reg = <0x20>;
-		chip-name = "S3706";
-
-		/* Interrupt && Irq-gpio */
-		interrupt-parent = <&tlmm>;
-		interrupts = <125 0x00>;
-
-		/* Power Config */
-		enable2v8_gpio = <&pm660_gpios 13 0x1>;
-		vdd_2v8-supply = <&pm660l_l2>;
-		vcc_1v8-supply = <&pm660_l8>;
-		vdd_2v8_volt = <2960000>;
-
-		/* Other HW Resource */
-		irq-gpio = <&tlmm 125 0x2008>;
-		reset-gpio = <&tlmm 119 0x1>; //use gpio 199 for evt
-		reset_t0-gpio = <&tlmm 99 0x1>; //use gpio 99 for t0
-		pinctrl-names = "default";
-		pinctrl-0 = <&ts_int_active &ts_reset_active>;
-
-		touchpanel,max-num-support = <10>;
-		touchpanel,tx-rx-num = <16 33>;
-		touchpanel,panel-coords = <1080 2340>;
-		touchpanel,display-coords = <1080 2340>;
-		touchpanel,touchmajor-limit = <0 54>;
-
-		/* SW Support Feature Control */
-		black_gesture_support;
-		fw_edge_limit_support;
-		fw_corner_limit_support;
-		//spurious_fingerprint_support;
-		charger_pump_support;
-		game_switch_support;
-		face_detect_support;
-		smart_gesture_support;
-		pressure_report_support;
-		fw_update_app_support;
-		fingerprint_underscreen_support;
-		rt155_fdreplace_rt59_support;
-                report_point_first_support;
-                report_120hz_support;
-		/*
-		 *Virtual Key Config:
-		 *1:touchpanel,button-type: <virtualkey_type  supportted_button-map>
-		 *virtualkey_type:
-		 *Type 1: using board_properties
-		 *Type 2: using same IC (button zone&& touch zone are seprate)
-		 *Type 3: using diffrent IC (button zone&& touch zone are seprate)
-		 *Type 4: No need of virtual key process
-		 *supportted_button-map:select|menu|home|back
-		 *
-		 *2:touchpanel,button-map
-		 *type (X1,Y1)(X2,Y2)(X3,Y3)(Width_X,Hight_Y)--Only when button-type is 0
-		 */
-		touchpanel,button-type = <4>;
-		touchpanel.button-TRx = <0 0>;
-	};
-};
 &pm660_charger {
 	qcom,battery-data = <&mtp_batterydata>;
 };
 
-/* #ifdef VENDOR_EDIT */
-/* Huiqun.Han@PSW.MM.AudioDriver.Machine, 2018/06/28, Add for audio driver*/
+/* #ifdef OPLUS_ARCH_EXTENDS */
 &qupv3_se4_i2c {
 	status = "okay";
 	tfa98xx@35 {
@@ -289,8 +193,81 @@
 		tfa9890_vdd-supply = <&pm660_l13>;
 		status = "okay";
 	};
+
+	ak4376@10 {
+		compatible = "akm,ak4376";
+		reg = <0x10>;
+		ak4376,reset-gpio = <&tlmm 50 0x00>;
+		//audio-vdd-enable-gpio = <&tlmm 60 0x00>;
+		status = "okay";
+	};
 };
-/* #endif VENDOR_EDIT */
+/* #endif OPLUS_ARCH_EXTENDS */
+
+//#ifdef VENDOR_EDIT
+&qupv3_se9_i2c  {
+    //Wanghao@BSP.group 2018-04-15 add for enable i2c_9
+    status = "disabled";
+    synaptics17081@20 {
+        compatible = "synaptics-s3706";
+        reg = <0x20>;
+        chip-name = "S3706";
+
+        /* Interrupt && Irq-gpio */
+        interrupt-parent = <&tlmm>;
+        interrupts = <125 0x00>;
+
+        /* Power Config */
+        enable2v8_gpio = <&pm660_gpios 13 0x1>;
+        vdd_2v8-supply = <&pm660l_l2>;
+        vcc_1v8-supply = <&pm660_l8>;
+        vdd_2v8_volt = <2960000>;
+
+        /* Other HW Resource */
+        irq-gpio = <&tlmm 125 0x2008>;
+        reset-gpio = <&tlmm 119 0x1>; //use gpio 199 for evt
+        reset_t0-gpio = <&tlmm 99 0x1>; //use gpio 99 for t0
+        pinctrl-names = "default";
+        pinctrl-0 = <&ts_int_active &ts_reset_active>;
+
+        touchpanel,max-num-support = <10>;
+        touchpanel,tx-rx-num = <16 33>;
+        touchpanel,panel-coords = <1080 2340>;
+        touchpanel,display-coords = <1080 2340>;
+        touchpanel,touchmajor-limit = <0 54>;
+
+        /* SW Support Feature Control */
+        black_gesture_support;
+        fw_edge_limit_support;
+        fw_corner_limit_support;
+        //spurious_fingerprint_support;
+        charger_pump_support;
+        game_switch_support;
+        face_detect_support;
+        smart_gesture_support;
+        pressure_report_support;
+        fw_update_app_support;
+        fingerprint_underscreen_support;
+        rt155_fdreplace_rt59_support;
+        report_point_first_support;
+        report_120hz_support;
+        /*
+         *Virtual Key Config:
+         *1:touchpanel,button-type: <virtualkey_type  supportted_button-map>
+         *virtualkey_type:
+         *Type 1: using board_properties
+         *Type 2: using same IC (button zone&& touch zone are seprate)
+         *Type 3: using diffrent IC (button zone&& touch zone are seprate)
+         *Type 4: No need of virtual key process
+         *supportted_button-map:select|menu|home|back
+         *
+         *2:touchpanel,button-map
+         *type (X1,Y1)(X2,Y2)(X3,Y3)(Width_X,Hight_Y)--Only when button-type is 0
+         */
+        touchpanel,button-type = <4>;
+        touchpanel.button-TRx = <0 0>;
+    };
+};
 
 &tlmm {
 	smb_int_default: smb_int_default {
@@ -343,9 +320,9 @@
 		label = "gpio-keys";
 
 		pinctrl-names = "default";
-		//#ifdef VENDOR_EDIT
-		//Wanghao@BSP.group 2018-04-18 Modify for vol key
-		/*
+        //#ifdef VENDOR_EDIT
+        //Wanghao@BSP.group 2018-04-18 Modify for vol key
+        /*
 		pinctrl-0 = <&key_cam_snapshot_default
 			     &key_cam_focus_default
 			     &key_vol_up_default>;
@@ -379,107 +356,70 @@
 			debounce-interval = <15>;
 			linux,can-disable;
 		};
-	        */
-	        //#else
-	        pinctrl-0 = < &key_vol_up_default
-	                &key_vol_down_default>;
-	        vol_up {
-	            label = "volume_up";
-	            gpios = <&tlmm 24 GPIO_ACTIVE_LOW>;
-	            linux,input-type = <1>;
-	            linux,code = <115>;
-	            gpio-key,wakeup;
-	            debounce-interval = <15>;
-	            linux,can-disable;
-	        };
+            */
+            //#else
+            pinctrl-0 = < &key_vol_up_default
+                    &key_vol_down_default>;
+            vol_up {
+                label = "volume_up";
+                gpios = <&tlmm 24 GPIO_ACTIVE_LOW>;
+                linux,input-type = <1>;
+                linux,code = <115>;
+                gpio-key,wakeup;
+                debounce-interval = <15>;
+                linux,can-disable;
+            };
 
-	        vol_down {
-	            label = "volume_down";
-	            gpios = <&tlmm 92 GPIO_ACTIVE_LOW>;
-	            linux,input-type = <1>;
-	            linux,code = <114>;
-	            gpio-key,wakeup;
-	            debounce-interval = <15>;
-	            linux,can-disable;
-	        };
-	        //#endif
+            vol_down {
+                label = "volume_down";
+                gpios = <&tlmm 92 GPIO_ACTIVE_LOW>;
+                linux,input-type = <1>;
+                linux,code = <114>;
+                gpio-key,wakeup;
+                debounce-interval = <15>;
+                linux,can-disable;
+            };
+            //#endif
 	};
-    // #ifdef VENDOR_EDIT
-    /* Shengwang.Luo@BSP.Fingerprint.Basic 2019-09-17 add for fingerprint */
-    oppo_fp_common {
-        compatible = "oppo,fp_common"; //Manufacture, and Model
-	oppo,fp_gpio = <&pm660_gpios 6 GPIO_ACTIVE_LOW>;
-        pinctrl-names = "default";
-        pinctrl-0 = <&gpio_id2_default>;
+
+    // #ifdef OPLUS_FEATURE_SECURITY_COMMON
+    /* Ping.Liu@Bsp.Fingerprint.Secure 2020-12-23 add for secure proc */
+    oplus_secure_common {
+        compatible = "oplus,secure_common";
+    };
+    // #endif /* OPLUS_FEATURE_SECURITY_COMMON */
+
+    // #ifdef OPLUS_FEATURE_FINGERPRINT
+    oplus_fp_common {
+        compatible = "oplus,fp_common"; //Manufacture, and Model
+        oplus,fp_gpio_num = <1>; /* the gpio number of fingerprint id used */
+        oplus,fp_gpio_0 = <&pm660_gpios 6 GPIO_ACTIVE_LOW>; // 0: silead,1:goodix,empty:no id pin
+        //pinctrl-names = "default";
+        //pinctrl-0 = <&gpio_id2_default>;
         fpc_fingerprint {
-            oppo,fp-id = <0>; /* fp id mapping table */
+            oplus,fp-id = <0>; /* fp id mapping table */
+            vendor-chip = <6>; /* please refer to the struct fp_vendor_t in oppo_fp_commmon.n */
+            eng-menu = "-1,-1"; /* represents SNR, inclination test item in engineer menu, and 0/1 means off/on */
+            chip-name = "F_1511";  /* /proc/fp_id, will be displayed in engineer menu  */
+        };
+        fpc_fingerprint_bak {
+            oplus,fp-id = <1>; /* fp id mapping table */
             vendor-chip = <6>; /* please refer to the struct fp_vendor_t in oppo_fp_commmon.n */
             eng-menu = "-1,-1"; /* represents SNR, inclination test item in engineer menu, and 0/1 means off/on */
             chip-name = "F_1511";  /* /proc/fp_id, will be displayed in engineer menu  */
         };
     };
 
-    fpc_fpc1020 { //Slave driver and CS ID
-	        compatible = "fpc,fpc1020"; //Manufacture, and Model
-	        fpc,irq-gpio = <&tlmm 121 0x00>;
-		fpc,rst-gpio = <&tlmm 80  0x01>;
-	        vdd_io-supply = <&pm660_l14>;  // 1.8V
-		/*# tangshaoqing@RM.Bsp.Drv 2018-11-23 detele for sdhci2 */
-		//vmch-supply = <&pm660l_l5>;  // 2.95V
-	        pinctrl-names = "default";
-		pinctrl-0 = <&gpio_fpc_irq_default>;
-		pinctrl-1 = <&gpio_fpc_rst_default>;
-	};
-    // #endif VENDOR_EDIT
-    // #ifdef VENDOR_EDIT
-    /* Ping.Liu@Bsp.Fingerprint.Secure 2018-12-13 add for secure proc */
-    oppo_secure_common {
-        compatible = "oppo,secure_common";
-    };
-    //#endif //VENDOR_EDIT
-    // #ifdef VENDOR_EDIT
-    /* ziqing.guo@BSP.Fingerprint.Basic 2019-07-18 add for euclid */
-    /* oujinrong@BSP.Fingerprint.Basic 2019-09-03 add for power list */
-    goodix_fp {
-        compatible = "goodix,goodix_fp";
-        power-mode = <1> ; /*please refer to the struct fp_power_mode_t in oppo_fp_commmon.n ,0: power mode not set, 1: ldo power, 2: gpio power, 3: auto power */
-       // ldo-supply = <&pm660l_l5>; // pm660l_l5 for goodix_fp
-        ldo-config = <2960000 2960000 150000>;
-        gpio-power = <&tlmm 2 0x0>;
-        interrupt-parent = <&tlmm>;
-        interrupts = <121 0>;
-        goodix,gpio_irq = <&tlmm 121 0x1>;
-        goodix,gpio_reset = <&tlmm 80 0x0>;
+     fpc_fpc1020 {
+        compatible = "fpc,fpc1020"; //Manufacture, and Model
+        fpc,irq-gpio = <&tlmm 121 0x00>;
+        fpc,rst-gpio = <&tlmm 80  0x01>;
+        vdd_io-supply = <&pm660_l14>;  // 1.8V
         pinctrl-names = "default";
-        pinctrl-0 = <&gpio_goodix_irq_default>;
-
-        power-num = <1> ;
-        power_source_1 {
-            power-mode = <1>;   /* 1 = ldo power, refer to oppo_fp_common.h*/
-            power-name = "ldo";
-            power-config = "ldo-config";
-            delay-time = <0>;
-        };
-    };
-   // #endif VENDOR_EDIT
-
-   // #ifdef VENDOR_EDIT
-   /* luhongyu@Bsp.Fingerprint.Basic 2018-10-30 add for fingerprint */
-    silead_fp {
-        compatible = "sil,silead_fp";
-        spi-max-frequency = <4800000>;
-        qcom,qup-id = <16>;
-        interrupt-parent = <&tlmm>;
-        interrupts = <121 0>;
-        //avdd-supply = <&pm660l_l5>;
-        pinctrl-names = "pmx_silfp_active","pmx_silfp_suspend","pmx_silfp_release";
-        pinctrl-0 = <&silfp_int_active &silfp_reset_active>;
-        pinctrl-1 = <&silfp_int_suspend &silfp_reset_suspend>;
-        pinctrl-2 = <&silfp_release>;
-        rst-gpios = <&tlmm 80 0x0>;
-        irq-gpios = <&tlmm 121 0x1>;
-    };
-    //#endif VENDOR_EDIT
+        pinctrl-0 = <&gpio_fpc_irq_default>;
+        pinctrl-1 = <&gpio_fpc_rst_default>;
+   };
+   // #endif OPLUS_FEATURE_FINGERPRINT
 };
 
 &dsi_dual_nt35597_truly_video {
@@ -610,15 +550,15 @@
 	qcom,mdss-dsi-bl-pmic-control-type = "bl_ctrl_wled";
 	qcom,mdss-dsi-bl-min-level = <1>;
 	qcom,mdss-dsi-bl-max-level = <4095>;
-	//#ifndef VENDOR_EDIT
+	//#ifndef OPLUS_BUG_STABILITY
 	//caiwutang@RM.Display.LCD.Parame for no lcd
 	//qcom,platform-reset-gpio = <&tlmm 75 0>;
 	//qcom,platform-te-gpio = <&tlmm 10 0>;
 	//qcom,panel-mode-gpio = <&tlmm 76 0>;
-	//#else /* VENDOR_EDIT */
+	//#else /* OPLUS_BUG_STABILITY */
 	qcom,platform-reset-gpio = <&tlmm 26 0>;
 	qcom,platform-te-gpio = <&tlmm 10 0>;
-	//#endif/* VENDOR_EDIT */
+	//#endif/* OPLUS_BUG_STABILITY */
 	qcom,mdss-dsi-mode-sel-gpio-state = "single_port";
 };
 
@@ -628,7 +568,7 @@
 
 &pm660l_wled {
 	status = "okay";
-	//#ifndef VENDOR_EDIT
+	//#ifndef OPLUS_BUG_STABILITY
 	//caiwutang@RM.MM.Display.LCD.Stability 2018/11/24  set 3 sink
 	//qcom,led-strings-list = [01 02];
 	//#else
@@ -645,29 +585,26 @@
 		status = "disabled";
 	};
 };
-//#ifdef VENDOR_EDIT /* Jianchao.Shi@BSP.CHG.Basic, 2016/12/20, sjc Add for charging */
 &qupv3_se10_i2c {
 	status = "okay";
-//#ifdef VENDOR_EDIT /* Jianchao.Shi@PSW.BSP.CHG.Basic, 2018/04/05, sjc Add for charging */
 	pinctrl-names = "default", "sleep", "pulldown", "pullup";
 	pinctrl-2 = <&qupv3_se10_i2c_pulldown>;
 	pinctrl-3 = <&qupv3_se10_i2c_pullup>;
-//#endif //VENDOR_EDIT
-
+//#endif //OPLUS_FEATURE_CHG_BASIC
 
 	bq27541-battery@55 {
 		status = "okay";
-		compatible = "oppo,bq27541-battery";
+		compatible = "oplus,bq27541-battery";
 		reg = <0x55>;
 		qcom,modify-soc-smooth;
 	};
-	
+
 
 	stm8s_fastcg@26{
 		status = "okay";
-		compatible = "oppo,stm8s-fastcg";
+		compatible = "oplus,stm8s-fastcg";
 		reg = <0x26>;
-		qcom,oppo_batt_4400mv;
+		qcom,oplus_batt_4400mv;
 		qcom,vooc_fw_update_newmethod;
 		qcom,vooc-low-temp = <120>;
 		qcom,vooc-high-temp = <430>;

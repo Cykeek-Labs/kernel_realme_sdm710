@@ -18,7 +18,7 @@
 		#address-cells = <1>;
 		#size-cells = <1>;
 		#cooling-cells = <2>;
-		qcom,micro-usb;//add micro usb by ouyangbaili
+
 		qcom,pmic-revid = <&pm660_revid>;
 
 		io-channels = <&pm660_rradc 8>,
@@ -30,7 +30,6 @@
 				   "usbin_i",
 				   "usbin_v";
 
-//#ifdef VENDOR_EDIT /* Jianchao.Shi@BSP.CHG.Basic, 2017/01/20, sjc Delete for charging */
 		//qcom,wipower-max-uw = <5000000>;
 //#endif
 
@@ -39,10 +38,8 @@
 		qcom,thermal-mitigation
 				= <3000000 2500000 2000000 1500000
 					1000000 500000>;
-//#ifdef VENDOR_EDIT /* Jianchao.Shi@BSP.CHG.Basic, 2017/01/20, sjc Delete for charging */
 		//qcom,auto-recharge-soc;
 //#endif
-//#ifdef VENDOR_EDIT /* Jianchao.Shi@BSP.CHG.Basic, 2016/12/26, sjc Add for charging */
 			//for smb2:
 			qcom,usb-icl-ua = <2000000>;
 			qcom,fcc-max-ua = <2000000>;
@@ -53,6 +50,7 @@
 			//qcom,otg-cl-ua = <2000000>;
 			qcom,float-option = <1>;
 
+			qcom,oppo-pps-usbpd-detection = <&pm660_pdphy>;
 			//for oppo chg framework:
 			qcom,input_current_charger_ma = <2000>;
 			qcom,input_current_usb_ma = <500>;
@@ -151,7 +149,6 @@
 			qcom,ffc2_temp_low_decidegc = <120>;
 			qcom,ffc2_exit_step_ma = <100>;
 
-
 			qcom,ffc_normal_vfloat_sw_limit = <4447>;//exit ffc2
 			qcom,ffc_temp_normal_vfloat_mv = <4500>;//hw full
 			qcom,ffc_normal_vfloat_over_sw_limit = <4500>;//vfloat
@@ -166,6 +163,7 @@
 			qcom,default_little_cool_vfloat_sw_limit = <4350>;
 			qcom,default_temp_little_cool_vfloat_mv = <4387>;
 			qcom,default_little_cool_vfloat_over_sw_limit = <4397>;
+			///qcom,offset_temp = <30>;
 			//for control:
 			//qcom,suspend_after_full;
 			qcom,check_batt_full_by_sw;
@@ -173,11 +171,16 @@
 			qcom,chg_ctrl_by_lcd;
 			qcom,chg_ctrl_by_camera;
 			qcom,sw_vfloat_over_protect_enable;
+			//qcom,charger_id_num = <7>;
+
+			qcom,vooc_show_ui_soc_decimal;
+			qcom,ui_soc_decimal_speedmin = <20>;//2A
 
 			qcom,chargerid_switch-gpio = <&tlmm 44 0x00>;
 			qcom,ship-gpio = <&tlmm 21 0x00>;
 			qcom,ccdetect-gpio = <&tlmm 95 0x00>;//OuYangBaiLi@BSP.CHG.Basic 2018/11/24 modify for otg
 			//qcom,shortc-gpio = <&tlmm 43 0x00>;
+			////qcom,ccdetect-gpio = <&tlmm 40 0x00>;
 			//qcom,dischg-gpio = <&pm660l_gpios 7 0x00>;
 			pinctrl-names = "chargerid_switch_active", "chargerid_switch_sleep", "chargerid_switch_default",
 							"ship_active", "ship_sleep",
@@ -185,7 +188,6 @@
 							"chg_qupv3_se12_2uart_sleep", "chg_qupv3_se12_2uart_default";
 							///"shortc_active";
 							/*"dischg_enable", "dischg_disable",*/
-
 			pinctrl-0 = <&chargerid_switch_active>;
 			pinctrl-1 = <&chargerid_switch_sleep>;
 			pinctrl-2 = <&chargerid_switch_default>;
@@ -195,9 +197,11 @@
 			pinctrl-6 = <&ccdetect_sleep>;
 			pinctrl-7 = <&chg_qupv3_se12_2uart_sleep>;
 			pinctrl-8 = <&chg_qupv3_se12_2uart_default>;
+			//pinctrl-3 = <&ccdetect_active>;
+			//pinctrl-4 = <&ccdetect_sleep>;
 			//pinctrl-5 = <&dischg_enable>;
 			//pinctrl-6 = <&dischg_disable>;
-//#endif //VENDOR_EDIT
+//#endif //OPLUS_FEATURE_CHG_BASIC
 		qcom,chgr@1000 {
 			reg = <0x1000 0x100>;
 			interrupts =
@@ -344,7 +348,6 @@
 		qcom,fg-auto-recharge-soc;
 		qcom,fg-recharge-soc-thr = <98>;
 		qcom,fg-force-load-profile;
-//#ifndef VENDOR_EDIT /* Jianchao.Shi@BSP.CHG.Basic, 2018/02/05, sjc Modify for charging */
 		//status = "okay";
 //#else
 		status = "disabled";
@@ -417,10 +420,7 @@
 		qcom,actuator-type = <1>;
 		//#endif
 		qcom,play-mode = "direct";
-		//#ifdef VENDOR_EDIT
-		//Added by Fei.Mo@Bsp.Bootloader.Bootflow, 2019/03/02 ,Modify for vib vmax setting,
 		qcom,vmax-mv = <3000>;
-		//#endif
 		qcom,ilim-ma = <800>;
 		qcom,sc-dbc-cycles = <8>;
 		qcom,wave-play-rate-us = <6667>;
@@ -456,8 +456,7 @@
 		qcom,dim-mode = "hybrid";
 		qcom,hyb-thres = <625>;
 		qcom,sync-dly-us = <800>;
-//#ifndef VENDOR_EDIT
-/* Jinzhu.Han@RM.MM.LCD, 2019/11/02, reduce WLED surrent */
+//#ifndef OPLUS_BUG_STABILITY
 		//qcom,fs-curr-ua = <25000>;
 //#else
 		qcom,fs-curr-ua = <20000>;
@@ -569,14 +568,18 @@
 	dwc3@a600000 {
 		usb-phy = <&qusb_phy0>, <&usb_nop_phy>;
 		maximum-speed = "high-speed";
-	};//add micro usb by ouyangbaili
+	};
+//#endif //OPLUS_FEATURE_CHG_BASIC
+};
+
+&usb_qmp_dp_phy {
+	status = "disabled";
 };
 &qupv3_se3_i2c {
 	status = "disabled";
 };
-&usb_qmp_dp_phy {
-	status = "disabled";
-};//add micro usb by ouyangbaili
+//#endif //OPLUS_FEATURE_CHG_BASIC
+
 &thermal_zones {
 	xo-therm-step {
 		trips {

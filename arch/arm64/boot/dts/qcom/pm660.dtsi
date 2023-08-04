@@ -45,7 +45,7 @@
 			qcom,kpdpwr-sw-debounce;
 			qcom,system-reset;
 			qcom,store-hard-reset-reason;
-			oppo,pmicwd;
+			qcom,pmicwd;
 
 			qcom,pon_1 {
 				qcom,pon-type = <0>;
@@ -70,31 +70,24 @@
 			#thermal-sensor-cells = <0>;
 		};
 
-//#ifdef VENDOR_EDIT
-/* luhongyu@BSP.Fingerprint.Basic, 2018/10/10 , Modify for Fingerprint ID */
-/* 1. add <0x0 0xc5 0 IRQ_TYPE_NONE> */
-/* 2. add "pm660_gpio6" */
-/* 3. remove 6 in <1 5 6 7 8 10> */
 		pm660_gpios: pinctrl@c000 {
 			compatible = "qcom,spmi-gpio";
 			reg = <0xc000 0xd00>;
 			interrupts = <0x0 0xc1 0 IRQ_TYPE_NONE>,
 					<0x0 0xc2 0 IRQ_TYPE_NONE>,
 					<0x0 0xc3 0 IRQ_TYPE_NONE>,
-					<0x0 0xc5 0 IRQ_TYPE_NONE>,
 					<0x0 0xc8 0 IRQ_TYPE_NONE>,
 					<0x0 0xca 0 IRQ_TYPE_NONE>,
 					<0x0 0xcb 0 IRQ_TYPE_NONE>,
 					<0x0 0xcc 0 IRQ_TYPE_NONE>;
 			interrupt-names = "pm660_gpio2", "pm660_gpio3",
-					"pm660_gpio4", "pm660_gpio6", "pm660_gpio9",
+					"pm660_gpio4", "pm660_gpio9",
 					"pm660_gpio11", "pm660_gpio12",
 					"pm660_gpio13";
 			gpio-controller;
 			#gpio-cells = <2>;
-			qcom,gpios-disallowed = <1 5 7 8 10>;
+			qcom,gpios-disallowed = <1 5 6 7 8 10>;
 		};
-//#endif
 
 		pm660_coincell: qcom,coincell@2800 {
 			compatible = "qcom,qpnp-coincell";
@@ -250,7 +243,6 @@
 				qcom,fast-avg-setup = <0>;
 				qcom,cal-val = <0>;
 			};
-			//#ifdef VENDOR_EDIT /* Jianchao.Shi@BSP.CHG.Basic, 2017/01/23, sjc Add for charging */
 			chan@12 {
 				label = "gpio2_adc";
 				reg = <0x12>; //channel for GPIO2
@@ -260,10 +252,9 @@
 				qcom,scale-function = <0>;
 				qcom,hw-settle-time = <2>;
 				qcom,fast-avg-setup = <0>;
-                qcom,cal-val = <0>;
+				qcom,cal-val = <0>;
 			};
 			//#endif
-			//#ifdef VENDOR_EDIT /* Wanghao@BSP.CHG.Basic, 2017/01/23, sjc Add for sub board choose */
 			chan@13 {
 				label = "gpio3_adc";
 				reg = <0x13>; //channel for GPIO3
@@ -273,10 +264,9 @@
 				qcom,scale-function = <0>;
 				qcom,hw-settle-time = <2>;
 				qcom,fast-avg-setup = <0>;
-                qcom,cal-val = <0>;
+				qcom,cal-val = <0>;
 			};
 			//#endif
-			//#ifdef VENDOR_EDIT /* tongfeng.Huang@BSP.CHG.Basic, 2018/05/08,  Add for charging USB BTB TEMP*/
 			chan@14 {
 				label = "gpio4_adc";
 				reg = <0x14>; //channel for GPIO4
@@ -286,7 +276,7 @@
 				qcom,scale-function = <0>;
 				qcom,hw-settle-time = <2>;
 				qcom,fast-avg-setup = <0>;
-             qcom,cal-val = <0>;
+				qcom,cal-val = <0>;
 			};
 			//#endif
 		};
@@ -561,6 +551,9 @@
 		thermal-sensors = <&bcl_sensor 2>;
 		wake-capable-sensor;
 		tracks-low;
+		/*#ifdef OPLUS_FEATURE_CHG_BASIC*/
+		//status = "disabled";
+		//#endif /* VENDOR_EDIT */
 
 		trips {
 			pm660_vbat_adc: vbat-adc {
@@ -578,6 +571,9 @@
 		thermal-sensors = <&bcl_sensor 3>;
 		wake-capable-sensor;
 		tracks-low;
+		/*#ifdef OPLUS_FEATURE_CHG_BASIC*/
+		status = "disabled";
+		//#endif /* VENDOR_EDIT */
 
 		trips {
 			vbat-low {
@@ -595,6 +591,9 @@
 		thermal-sensors = <&bcl_sensor 4>;
 		wake-capable-sensor;
 		tracks-low;
+		/*#ifdef OPLUS_FEATURE_CHG_BASIC*/
+		status = "disabled";
+		//#endif /* VENDOR_EDIT */
 
 		trips {
 			vbat-too-low {
@@ -612,6 +611,9 @@
 		thermal-sensors = <&bcl_sensor 5>;
 		wake-capable-sensor;
 		tracks-low;
+		/*#ifdef OPLUS_FEATURE_CHG_BASIC*/
+		//status = "disabled";
+		//#endif /* VENDOR_EDIT */
 
 		trips {
 			pm660_low_soc: low-soc {

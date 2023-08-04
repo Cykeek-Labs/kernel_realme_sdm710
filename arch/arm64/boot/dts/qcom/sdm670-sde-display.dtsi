@@ -30,9 +30,12 @@
 #include "dsi-panel-nt36850-truly-dualmipi-wqhd-cmd.dtsi"
 #include "dsi-panel-hx8399-truly-singlemipi-fhd-video.dtsi"
 #include "dsi-panel-hx83112a-truly-singlemipi-fhd-video.dtsi"
+#include "dsi-panel-xrsmrtvwr-jdi-dual-video.dtsi"
 #include <dt-bindings/clock/mdss-10nm-pll-clk.h>
-//#ifdef VENDOR_EDIT
-/* liping-m@PSW.MM.Display.LCD.Stability,2018/08/30,add lcd */
+//#ifdef OPLUS_BUG_STABILITY
+#include "dsi-panel_oppo17081samsung_ams596w401_1080_2280.dtsi"
+#include "dsi-panel_oppo18081samsung_ams641rw01_1080_2340.dtsi"
+#include "dsi-panel_oppo18041samsung_ams653tk01_1080_2340.dtsi"
 #include "dsi-panel_oppo18621dsjm_hx83112a_1080_2340_video.dtsi"
 //#endif
 
@@ -162,10 +165,9 @@
 		vddio-supply = <&pm660_l11>;
 		lab-supply = <&lcdb_ldo_vreg>;
 		ibb-supply = <&lcdb_ncp_vreg>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_dual_nt35597_truly_cmd_display: qcom,dsi-display@1 {
@@ -190,10 +192,9 @@
 		vddio-supply = <&pm660_l11>;
 		lab-supply = <&lcdb_ldo_vreg>;
 		ibb-supply = <&lcdb_ncp_vreg>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_nt35597_truly_dsc_cmd_display: qcom,dsi-display@2 {
@@ -218,10 +219,9 @@
 		vddio-supply = <&pm660_l11>;
 		lab-supply = <&lcdb_ldo_vreg>;
 		ibb-supply = <&lcdb_ncp_vreg>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_nt35597_truly_dsc_video_display: qcom,dsi-display@3 {
@@ -252,10 +252,9 @@
 		vddio-supply = <&pm660_l11>;
 		lab-supply = <&lcdb_ldo_vreg>;
 		ibb-supply = <&lcdb_ncp_vreg>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_sim_vid_display: qcom,dsi-display@4 {
@@ -274,10 +273,9 @@
 		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
 
 		qcom,dsi-panel = <&dsi_sim_vid>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_dual_sim_vid_display: qcom,dsi-display@5 {
@@ -296,10 +294,9 @@
 		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
 
 		qcom,dsi-panel = <&dsi_dual_sim_vid>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_sim_cmd_display: qcom,dsi-display@6 {
@@ -318,10 +315,9 @@
 		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
 
 		qcom,dsi-panel = <&dsi_sim_cmd>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_dual_sim_cmd_display: qcom,dsi-display@7 {
@@ -340,10 +336,9 @@
 		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
 
 		qcom,dsi-panel = <&dsi_dual_sim_cmd>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_sim_dsc_375_cmd_display: qcom,dsi-display@8 {
@@ -362,10 +357,9 @@
 		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
 
 		qcom,dsi-panel = <&dsi_sim_dsc_375_cmd>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_dual_sim_dsc_375_cmd_display: qcom,dsi-display@9 {
@@ -384,10 +378,9 @@
 		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
 
 		qcom,dsi-panel = <&dsi_dual_sim_dsc_375_cmd>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_dual_nt35597_video_display: qcom,dsi-display@10 {
@@ -411,10 +404,9 @@
 		vddio-supply = <&pm660_l11>;
 		lab-supply = <&lcdb_ldo_vreg>;
 		ibb-supply = <&lcdb_ncp_vreg>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_dual_nt35597_cmd_display: qcom,dsi-display@11 {
@@ -438,10 +430,9 @@
 		vddio-supply = <&pm660_l11>;
 		lab-supply = <&lcdb_ldo_vreg>;
 		ibb-supply = <&lcdb_ncp_vreg>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_rm67195_amoled_fhd_cmd_display: qcom,dsi-display@12 {
@@ -464,10 +455,9 @@
 		qcom,dsi-panel = <&dsi_rm67195_amoled_fhd_cmd>;
 		vddio-supply = <&pm660_l11>;
 		vdda-3p3-supply = <&pm660l_l6>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_nt35695b_truly_fhd_video_display: qcom,dsi-display@13 {
@@ -490,10 +480,9 @@
 		vddio-supply = <&pm660_l11>;
 		lab-supply = <&lcdb_ldo_vreg>;
 		ibb-supply = <&lcdb_ncp_vreg>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_nt35695b_truly_fhd_cmd_display: qcom,dsi-display@14 {
@@ -517,10 +506,9 @@
 		vddio-supply = <&pm660_l11>;
 		lab-supply = <&lcdb_ldo_vreg>;
 		ibb-supply = <&lcdb_ncp_vreg>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_dual_nt36850_truly_cmd_display: qcom,dsi-display@15 {
@@ -544,10 +532,9 @@
 		vddio-supply = <&pm660_l11>;
 		lab-supply = <&lcdb_ldo_vreg>;
 		ibb-supply = <&lcdb_ncp_vreg>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	dsi_hx8399_truly_cmd_display: qcom,dsi-display@16 {
@@ -565,13 +552,11 @@
 		pinctrl-0 = <&sde_dsi_active &sde_te_active>;
 		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
 		qcom,platform-te-gpio = <&tlmm 10 0>;
-		//#ifndef VENDOR_EDIT
-		/*caiwutang@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node but for no lcd*/
+		//#ifndef OPLUS_BUG_STABILITY
 		//qcom,platform-reset-gpio = <&tlmm 75 0>;
 		//#endif
 		qcom,dsi-panel = <&dsi_hx8399_truly_cmd>;
-		//#ifdef VENDOR_EDIT
-		/*caiwutang@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node but for no lcd*/
+		//#ifdef OPLUS_BUG_STABILITY
 		//vddio-supply = <&pm660_l11>;
 		//#else
 		vddio-supply = <&pm660_l8>;
@@ -601,10 +586,9 @@
 		vddio-supply = <&pm660_l11>;
 		lab-supply = <&lcdb_ldo_vreg>;
 		ibb-supply = <&lcdb_ncp_vreg>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 	};
 
 	ext_dsi_bridge_display: qcom,dsi-display@18 {
@@ -617,10 +601,9 @@
 		clocks = <&mdss_dsi0_pll BYTECLK_MUX_0_CLK>,
 		       <&mdss_dsi0_pll PCLK_MUX_0_CLK>;
 		clock-names = "mux_byte_clk", "mux_pixel_clk";
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
+		//#ifdef OPLUS_BUG_STABILITY
 		status = "disabled";
-		//#endif /* VENDOR_EDIT *
+		//#endif /* OPLUS_BUG_STABILITY *
 		ports {
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -633,9 +616,107 @@
 		};
 	};
 
-	//#ifdef VENDOR_EDIT
-	/* caiwutang@RM.MM.Display.LCD.Fature,2018/11/12,support hx83112a */
-	dsi_oppo18621dsjm_hx83112a_1080_2340_video_display: qcom,dsi-display@21 {
+	//#ifdef OPLUS_BUG_STABILITY
+	dsi_oppo18081samsung_ams641rw01_1080_2340_cmd_display: qcom,dsi-display@20 {
+		compatible = "qcom,dsi-display";
+		label = "dsi_oppo18081samsung_ams641rw01_1080_2340_cmd_display";
+		qcom,display-type = "primary";
+
+		qcom,dsi-ctrl = <&mdss_dsi0>;
+		qcom,dsi-phy = <&mdss_dsi_phy0>;
+		clocks = <&mdss_dsi0_pll BYTECLK_MUX_0_CLK>,
+		       <&mdss_dsi0_pll PCLK_MUX_0_CLK>;
+		clock-names = "mux_byte_clk", "mux_pixel_clk";
+
+		pinctrl-names = "panel_active", "panel_suspend";
+		pinctrl-0 = <&sde_dsi_active &sde_te_active>;
+		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
+		qcom,platform-te-gpio = <&tlmm 10 0>;
+		qcom,platform-reset-gpio = <&tlmm 26 0>;
+		qcom,dsi-display-active;
+
+		qcom,dsi-panel = <&dsi_oppo18081samsung_ams641rw01_1080_2340_cmd>;
+		vddio-supply = <&pm660_l8>;
+		vdda-3p3-supply = <&pm660l_l6>;
+	};
+	//#endif
+
+	dsi_sharp_1080_cmd_display: qcom,dsi-display@19 {
+		compatible = "qcom,dsi-display";
+		label = "dsi_sharp_1080_cmd_display";
+		qcom,display-type = "primary";
+
+		qcom,dsi-ctrl = <&mdss_dsi0>;
+		qcom,dsi-phy = <&mdss_dsi_phy0>;
+		clocks = <&mdss_dsi0_pll BYTECLK_MUX_0_CLK>,
+			<&mdss_dsi0_pll PCLK_MUX_0_CLK>;
+		clock-names = "src_byte_clk", "src_pixel_clk";
+
+		pinctrl-names = "panel_active", "panel_suspend";
+		pinctrl-0 = <&sde_dsi_active &sde_te_active>;
+		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
+		qcom,platform-te-gpio = <&tlmm 10 0>;
+		qcom,platform-reset-gpio = <&tlmm 75 0>;
+		qcom,panel-mode-gpio = <&tlmm 76 0>;
+
+		qcom,dsi-panel = <&dsi_sharp_1080_cmd>;
+		vddio-supply = <&pm660_l11>;
+		lab-supply = <&lcdb_ldo_vreg>;
+		ibb-supply = <&lcdb_ncp_vreg>;
+		//#ifdef OPLUS_BUG_STABILITY
+		status = "disabled";
+		//#endif /* OPLUS_BUG_STABILITY *
+	};
+
+	dsi_r63417_truly_1080_cmd_display: qcom,dsi-display@200 {
+		compatible = "qcom,dsi-display";
+		label = "dsi_r63417_truly_1080_cmd_display";
+		qcom,display-type = "primary";
+
+		qcom,dsi-ctrl = <&mdss_dsi0>;
+		qcom,dsi-phy = <&mdss_dsi_phy0>;
+		clocks = <&mdss_dsi0_pll BYTECLK_MUX_0_CLK>,
+			<&mdss_dsi0_pll PCLK_MUX_0_CLK>;
+		clock-names = "src_byte_clk", "src_pixel_clk";
+
+		pinctrl-names = "panel_active", "panel_suspend";
+		pinctrl-0 = <&sde_dsi_active &sde_te_active>;
+		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
+		qcom,platform-te-gpio = <&tlmm 10 0>;
+		qcom,platform-reset-gpio = <&tlmm 75 0>;
+		qcom,panel-mode-gpio = <&tlmm 76 0>;
+
+		qcom,dsi-panel = <&dsi_r63417_truly_1080_cmd>;
+		vddio-supply = <&pm660_l11>;
+		lab-supply = <&lcdb_ldo_vreg>;
+		ibb-supply = <&lcdb_ncp_vreg>;
+	};
+
+	dsi_dual_xrsmrtvwr_jdi_video_display: qcom,dsi-display@21 {
+		compatible = "qcom,dsi-display";
+		label = "dsi_dual_xrsmrtvwr_jdi_video_display";
+		qcom,display-type = "primary";
+
+		qcom,dsi-ctrl = <&mdss_dsi0 &mdss_dsi1>;
+		qcom,dsi-phy = <&mdss_dsi_phy0 &mdss_dsi_phy1>;
+		clocks = <&mdss_dsi0_pll BYTECLK_MUX_0_CLK>,
+		       <&mdss_dsi0_pll PCLK_MUX_0_CLK>;
+		clock-names = "mux_byte_clk", "mux_pixel_clk";
+
+		pinctrl-names = "panel_active", "panel_suspend";
+		pinctrl-0 = <&sde_dsi_active &sde_te_active>;
+		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
+		qcom,platform-reset-gpio = <&tlmm 75 0>;
+		qcom,panel-mode-gpio = <&tlmm 76 0>;
+
+		qcom,dsi-panel = <&dsi_dual_xrsmrtvwr_jdi_video>;
+		vddio-supply = <&pm660_l11>;
+		eab-supply = <&lcdb_ldo_vreg>;
+		ibb-supply = <&lcdb_ncp_vreg>;
+	};
+
+    //#ifdef OPLUS_BUG_STABILITY
+	dsi_oppo18621dsjm_hx83112a_1080_2340_video_display: qcom,dsi-display@22 {
 		compatible = "qcom,dsi-display";
 		label = "dsi_oppo18621dsjm_hx83112a_1080_2340_video_display";
 		qcom,display-type = "primary";
@@ -665,65 +746,7 @@
 		lab-supply = <&lcdb_ldo_vreg>;
 		ibb-supply = <&lcdb_ncp_vreg>;
 	};
-
-	//#endif
-
-	dsi_sharp_1080_cmd_display: qcom,dsi-display@19 {
-		compatible = "qcom,dsi-display";
-		label = "dsi_sharp_1080_cmd_display";
-		qcom,display-type = "primary";
-
-		qcom,dsi-ctrl = <&mdss_dsi0>;
-		qcom,dsi-phy = <&mdss_dsi_phy0>;
-		clocks = <&mdss_dsi0_pll BYTECLK_MUX_0_CLK>,
-			<&mdss_dsi0_pll PCLK_MUX_0_CLK>;
-		clock-names = "src_byte_clk", "src_pixel_clk";
-
-		pinctrl-names = "panel_active", "panel_suspend";
-		pinctrl-0 = <&sde_dsi_active &sde_te_active>;
-		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
-		qcom,platform-te-gpio = <&tlmm 10 0>;
-		qcom,platform-reset-gpio = <&tlmm 75 0>;
-		qcom,panel-mode-gpio = <&tlmm 76 0>;
-
-		qcom,dsi-panel = <&dsi_sharp_1080_cmd>;
-		vddio-supply = <&pm660_l11>;
-		lab-supply = <&lcdb_ldo_vreg>;
-		ibb-supply = <&lcdb_ncp_vreg>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
-		status = "disabled";
-		//#endif /* VENDOR_EDIT *
-	};
-
-	dsi_r63417_truly_1080_cmd_display: qcom,dsi-display@200 {
-		compatible = "qcom,dsi-display";
-		label = "dsi_r63417_truly_1080_cmd_display";
-		qcom,display-type = "primary";
-
-		qcom,dsi-ctrl = <&mdss_dsi0>;
-		qcom,dsi-phy = <&mdss_dsi_phy0>;
-		clocks = <&mdss_dsi0_pll BYTECLK_MUX_0_CLK>,
-			<&mdss_dsi0_pll PCLK_MUX_0_CLK>;
-		clock-names = "src_byte_clk", "src_pixel_clk";
-
-		pinctrl-names = "panel_active", "panel_suspend";
-		pinctrl-0 = <&sde_dsi_active &sde_te_active>;
-		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
-		qcom,platform-te-gpio = <&tlmm 10 0>;
-		qcom,platform-reset-gpio = <&tlmm 75 0>;
-		qcom,panel-mode-gpio = <&tlmm 76 0>;
-
-		qcom,dsi-panel = <&dsi_r63417_truly_1080_cmd>;
-		vddio-supply = <&pm660_l11>;
-		lab-supply = <&lcdb_ldo_vreg>;
-		ibb-supply = <&lcdb_ncp_vreg>;
-		//#ifdef VENDOR_EDIT
-		/*mark.yao@PSW.MM.Display.LCD.Stability,2018/4/19,disable the useless node */
-		status = "disabled";
-		//#endif /* VENDOR_EDIT *
-	};
-
+	//#endif /* OPLUS_BUG_STABILITY *
 
 	sde_wb: qcom,wb-display@0 {
 		compatible = "qcom,wb-display";
@@ -745,29 +768,22 @@
 	qcom,ext-disp = <&ext_disp>;
 
 	pinctrl-names = "mdss_dp_active", "mdss_dp_sleep";
-	/* #ifdef VENDOR_EDIT */
-	/* Jianfeng.Qiu@PSW.MM.AudioDriver.Machine, 2018/10/26, Delete for audio use gpio50*/
-	/*
 	pinctrl-0 = <&sde_dp_aux_active &sde_dp_usbplug_cc_active>;
 	pinctrl-1 = <&sde_dp_aux_suspend &sde_dp_usbplug_cc_suspend>;
 	qcom,aux-en-gpio = <&tlmm 50 0>;
-	*/
-	/* #endif VENDOR_EDIT */
 	qcom,aux-sel-gpio = <&tlmm 40 0>;
 	qcom,usbplug-cc-gpio = <&tlmm 38 0>;
 };
 
 &mdss_mdp {
-	//#ifdef VENDOR_EDIT
-	/*Liping-m@PSW.MM.Display.LCD.Feature,2018/12/21 disable dp support */
+	//#ifdef OPLUS_BUG_STABILITY
 	connectors = <&sde_rscc &sde_wb>;
 	//#else
 	//connectors = <&sde_rscc &sde_wb &sde_dp>;
 	//#endif
 };
 
-//#ifdef VENDOR_EDIT
-/* liping-m@PSW.MM.Display.LCD.Fature,2018/10/22,modify power supply to 3.0v */
+//#ifdef OPLUS_BUG_STABILITY
 &dsi_panel_pwr_supply_labibb_amoled {
 	qcom,panel-supply-entry@1 {
 		qcom,supply-min-voltage = <3008000>;
@@ -776,8 +792,6 @@
 	};
 };
 
-/*liping-m@PSW.MM.Display.LCD.Feature,2018/10/22 add DisplayPort support */
-/*liping-m@PSW.MM.Display.LCD.Feature,2018/12/21 disabled DisplayPort support */
 &sde_dp{
 	status = "disabled";
 
@@ -789,6 +803,29 @@
 	/delete-node/ qcom,aux-sel-gpio;
 };
 //#endif
+
+&dsi_dual_xrsmrtvwr_jdi_video {
+	qcom,mdss-dsi-t-clk-post = <0x10>;
+	qcom,mdss-dsi-t-clk-pre = <0x3D>;
+	qcom,mdss-dsi-min-refresh-rate = <53>;
+	qcom,mdss-dsi-max-refresh-rate = <80>;
+	qcom,esd-check-enabled;
+	qcom,mdss-dsi-panel-status-check-mode = "te_signal_check";
+	qcom,mdss-dsi-panel-status-command = [06 01 00 01 00 00 01 0a];
+	qcom,mdss-dsi-panel-status-command-state = "dsi_hs_mode";
+	qcom,mdss-dsi-panel-status-value = <0x9c>;
+	qcom,mdss-dsi-panel-on-check-value = <0x9c>;
+	qcom,mdss-dsi-panel-status-read-length = <1>;
+	qcom,mdss-dsi-display-timings {
+		timing@0{
+			qcom,mdss-dsi-panel-phy-timings =  [00 29 0A 0B 27 26
+				 0A 0B 07 02 04 00];
+			qcom,display-topology = <2 0 2>,
+						<1 0 2>;
+			qcom,default-topology-index = <0>;
+		};
+	};
+};
 
 &dsi_dual_nt35597_truly_video {
 	qcom,mdss-dsi-t-clk-post = <0x0D>;
